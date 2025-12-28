@@ -43,6 +43,41 @@ public class StudentService {
         System.out.println("ID   : " + student.getId());
         System.out.println(student.getDisplayName());
     }
+    public void updateStudent(Scanner scanner) throws EntityNotFoundException {
+        System.out.print("Enter Student ID to update: ");
+        int studentId = scanner.nextInt();
+        scanner.nextLine(); // consume leftover newline
+
+        // Find the student
+        Student student = repository.findAll().stream()
+                .filter(s -> s.getId() == studentId)
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException("Student not found"));
+
+        // Check if student is active
+        if (!student.isActive()) {
+            System.out.println("Cannot update. Student is inactive.");
+            return;
+        }
+
+        // Prompt for new details
+        System.out.print("Enter new first name (current: " + student.getFirstName() + "): ");
+        String firstName = scanner.nextLine();
+        System.out.print("Enter new last name (current: " + student.getLastName() + "): ");
+        String lastName = scanner.nextLine();
+        System.out.print("Enter new email (current: " + student.getEmail() + "): ");
+        String email = scanner.nextLine();
+        System.out.print("Enter new batch (current: " + student.getBatch() + "): ");
+        String batch = scanner.nextLine();
+
+        // Update student
+        student.setFirstName(firstName.isEmpty() ? student.getFirstName() : firstName);
+        student.setLastName(lastName.isEmpty() ? student.getLastName() : lastName);
+        student.setEmail(email.isEmpty() ? student.getEmail() : email);
+        student.setBatch(batch.isEmpty() ? student.getBatch() : batch);
+
+        System.out.println("Student updated successfully!");
+    }
 
     public void deactivateStudent(Scanner scanner) throws EntityNotFoundException {
         int id = scanner.nextInt();

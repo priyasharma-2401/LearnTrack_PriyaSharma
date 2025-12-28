@@ -6,13 +6,14 @@ public class MenuOptions {
                 1 Add Student
                 2 View Students
                 3 Search Student
-                4 Deactivate Student
-                5 Add Course
-                6 View Courses
-                7 Enroll Student
-                8 View Enrollments
-                9 Complete Enrollment
-                10 Cancel Enrollment
+                4 Update Student Details
+                5 Deactivate Student
+                6 Add Course
+                7 View Courses
+                8 Enroll Student
+                9 View Enrollments
+                10 Complete Enrollment
+                11 Cancel Enrollment
                 0 Exit
                 """);
     }
